@@ -93,8 +93,10 @@
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
                     </div>
-                    <input class="form-control" type="text" id="inputPppoeUsername" placeholder="PPPoE Username">
-                    <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password">
+                    <input class="form-control" type="text" id="inputPppoeUsername" placeholder="PPPoE Username"
+                           disabled>
+                    <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password"
+                           disabled>
                 </div>
                 <div class="form-text">The PPPoE username and password provided by your ISP.</div>
             </div>
@@ -129,6 +131,7 @@
         crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
+        // Select LAN IP
         $("#selectLanIp").change(function () {
             var inputLanIp = $("#inputLanIp");
             var value = $("#selectLanIp").val();
@@ -138,6 +141,19 @@
                 inputLanIp.attr("disabled", "");
             } else {
                 inputLanIp.removeAttr("disabled");
+            }
+        });
+
+        // Check PPPoE
+        $("#checkPppoe").change(function () {
+            if ($("#checkPppoe")[0].checked) {
+                $("#inputPppoeUsername").removeAttr("disabled");
+                $("#inputPppoePassword").removeAttr("disabled");
+            } else {
+                $("#inputPppoeUsername").attr("disabled", "");
+                $("#inputPppoeUsername").val("");
+                $("#inputPppoePassword").attr("disabled", "");
+                $("#inputPppoePassword").val("");
             }
         });
     });
