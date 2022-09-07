@@ -59,55 +59,45 @@
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="inputLanIp">LAN IP</label>
             <div class="col-10">
-                <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP, for eg. 192.168.88.1"
-                       required>
+                <div class="input-group">
+                    <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP" required>
+                    <div class="dropdown">
+                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">Select IP</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">192.168.1.1</a></li>
+                            <li><a class="dropdown-item" href="#">172.16.1.1</a></li>
+                            <li><a class="dropdown-item" href="#">10.0.0.1</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Custom IP</a></li>
+                        </ul>
+                    </div>
+                </div>
                 <div class="form-text">The default gateway IP of OpenWrt.</div>
             </div>
         </div>
-        <!--
-        <div class="row mb-3">
-            <div class="form-check form-switch col-2">
-                <input class="form-check-input" type="checkbox" id="checkPppoeUsername">
-                <label class="form-check-label" for="inputPppoeUsername">PPPoE Username</label>
-            </div>
-            <div class="col-10">
-                <input class="form-control" type="text" id="inputPppoeUsername"
-                       placeholder="PPPoE Username, for eg. username@domain.tld">
-                <div class="form-text">The username for PPPoE provided by your ISP.</div>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="form-check form-switch col-2">
-                <input class="form-check-input" type="checkbox" id="checkPppoePassword">
-                <label class="form-check-label" for="inputPppoePassword">PPPoE Password</label>
-            </div>
-            <div class="col-10">
-                <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password">
-                <div class="form-text">The password for PPPoE provided by your ISP.</div>
-            </div>
-        </div>
-        -->
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="checkPppoe">PPPoE</label>
             <div class="col-10">
                 <div class="input-group">
-                    <span class="input-group-text">
+                    <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
-                    </span>
+                    </div>
                     <input class="form-control" type="text" id="inputPppoeUsername" placeholder="PPPoE Username">
                     <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password">
                 </div>
                 <div class="form-text">The PPPoE username and password provided by your ISP.</div>
             </div>
         </div>
-
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="checkWifiPassword">Wi-Fi Password</label>
             <div class="col-10">
                 <div class="input-group">
-                    <span class="input-group-text">
+                    <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" id="checkWifiPassword">
-                    </span>
+                    </div>
                     <input class="form-control" type="password" id="inputWifiPassword" placeholder="Wi-Fi Password"
                            maxlength="63">
                 </div>
