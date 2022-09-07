@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Test</title>
+    <title>OIS Config Tool</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
@@ -34,34 +34,39 @@
 <div class="container">
     <div class="p-5 my-4 bg-light rounded-3">
         <h1>OpenWrt Init Script (OIS) Configuration Tool</h1>
-        <p class="lead">This tools is used to work with OIS script, and generate the configuration file in JSON format.
-            In today's world internet is the most popular way of connecting with the people.</p>
+        <p class="lead">This tools is used to work with OIS script, and generate the configuration file in JSON
+            format.</p>
+        <!--
         <p><a href="#" class="btn btn-primary btn-lg">Get started</a></p>
+        -->
     </div>
-    <form>
+    <form class="needs-validation">
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="inputName">Name</label>
             <div class="col-10">
-                <input class="form-control" type="text" id="inputName" placeholder="Name">
+                <input class="form-control" type="text" id="inputName" placeholder="Name" required>
                 <div class="form-text">The hostname for the OpenWrt.</div>
+                <div class="invalid-feedback">Please enter the hostname.</div>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="inputPassword">Password</label>
             <div class="col-10">
-                <input class="form-control" type="password" id="inputPassword" placeholder="Password">
+                <input class="form-control" type="password" id="inputPassword" placeholder="Password" required>
                 <div class="form-text">The password used to login OpenWrt.</div>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="inputLanIp">LAN IP</label>
             <div class="col-10">
-                <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP, for eg. 192.168.88.1">
+                <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP, for eg. 192.168.88.1"
+                       required>
                 <div class="form-text">The default gateway IP of OpenWrt.</div>
             </div>
         </div>
+        <!--
         <div class="row mb-3">
-            <div class="form-check col-2">
+            <div class="form-check form-switch col-2">
                 <input class="form-check-input" type="checkbox" id="checkPppoeUsername">
                 <label class="form-check-label" for="inputPppoeUsername">PPPoE Username</label>
             </div>
@@ -72,7 +77,7 @@
             </div>
         </div>
         <div class="row mb-3">
-            <div class="form-check col-2">
+            <div class="form-check form-switch col-2">
                 <input class="form-check-input" type="checkbox" id="checkPppoePassword">
                 <label class="form-check-label" for="inputPppoePassword">PPPoE Password</label>
             </div>
@@ -81,13 +86,31 @@
                 <div class="form-text">The password for PPPoE provided by your ISP.</div>
             </div>
         </div>
+        -->
         <div class="row mb-3">
-            <div class="form-check col-2">
-                <input class="form-check-input" type="checkbox" id="checkWifiPassword">
-                <label class="form-check-label" for="inputWifiPassword">Wi-Fi Password</label>
-            </div>
+            <label class="col-2 col-form-label" for="checkPppoe">PPPoE</label>
             <div class="col-10">
-                <input class="form-control" type="password" id="inputWifiPassword" placeholder="Wi-Fi Password">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
+                    </span>
+                    <input class="form-control" type="text" id="inputPppoeUsername" placeholder="PPPoE Username">
+                    <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password">
+                </div>
+                <div class="form-text">The PPPoE username and password provided by your ISP.</div>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <label class="col-2 col-form-label" for="checkWifiPassword">Wi-Fi Password</label>
+            <div class="col-10">
+                <div class="input-group">
+                    <span class="input-group-text">
+                        <input class="form-check-input mt-0" type="checkbox" id="checkWifiPassword">
+                    </span>
+                    <input class="form-control" type="password" id="inputWifiPassword" placeholder="Wi-Fi Password"
+                           maxlength="63">
+                </div>
                 <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
             </div>
         </div>
@@ -102,7 +125,7 @@
         </div>
         -->
         <div class="row">
-            <div class="col-10 offset-sm-2">
+            <div class="col-10 offset-2">
                 <button type="submit" class="btn btn-primary">Generate</button>
             </div>
         </div>
@@ -112,5 +135,28 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+<!--
+<script>
+    // Self-executing function
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+-->
 </body>
 </html>
