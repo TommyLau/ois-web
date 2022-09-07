@@ -43,18 +43,21 @@
             <label class="col-2 col-form-label" for="inputName">Name</label>
             <div class="col-10">
                 <input class="form-control" type="text" id="inputName" placeholder="Name">
+                <div class="form-text">The hostname for the OpenWrt.</div>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="inputPassword">Password</label>
             <div class="col-10">
                 <input class="form-control" type="password" id="inputPassword" placeholder="Password">
+                <div class="form-text">The password used to login OpenWrt.</div>
             </div>
         </div>
         <div class="row mb-3">
             <label class="col-2 col-form-label" for="inputLanIp">LAN IP</label>
             <div class="col-10">
-                <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP, for eg. 172.16.1.1">
+                <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP, for eg. 192.168.88.1">
+                <div class="form-text">The default gateway IP of OpenWrt.</div>
             </div>
         </div>
         <div class="row mb-3">
@@ -65,6 +68,7 @@
             <div class="col-10">
                 <input class="form-control" type="text" id="inputPppoeUsername"
                        placeholder="PPPoE Username, for eg. username@domain.tld">
+                <div class="form-text">The username for PPPoE provided by your ISP.</div>
             </div>
         </div>
         <div class="row mb-3">
@@ -74,6 +78,7 @@
             </div>
             <div class="col-10">
                 <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password">
+                <div class="form-text">The password for PPPoE provided by your ISP.</div>
             </div>
         </div>
         <div class="row mb-3">
@@ -83,6 +88,7 @@
             </div>
             <div class="col-10">
                 <input class="form-control" type="password" id="inputWifiPassword" placeholder="Wi-Fi Password">
+                <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
             </div>
         </div>
         <!--
