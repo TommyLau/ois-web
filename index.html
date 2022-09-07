@@ -64,8 +64,7 @@
                         <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP" required>
                     </div>
                     <div class="col-3">
-                        <select class="form-select input-group-text" aria-label="Select LAN IP" id="selectLanIp"
-                                onclick="updateLanIp()">
+                        <select class="form-select input-group-text" aria-label="Select LAN IP" id="selectLanIp">
                             <optgroup label="General">
                                 <option value="192.168.1.1">192.168.1.1</option>
                                 <option value="172.16.1.1">172.16.1.1</option>
@@ -120,23 +119,29 @@
         </div>
     </form>
 </div>
-<script>
-    function updateLanIp() {
-        const value = document.getElementById("selectLanIp").value;
-        const inputLanIp = document.getElementById("inputLanIp");
-
-        if (value) {
-            inputLanIp.value = value;
-            inputLanIp.disabled = true;
-        } else {
-            inputLanIp.disabled = false;
-        }
-    }
-</script>
 <!-- Bootstrap JS Bundle with Popper -->
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"
+        integrity="sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9"
+        crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function () {
+        $("#selectLanIp").change(function () {
+            var inputLanIp = $("#inputLanIp");
+            var value = $("#selectLanIp").val();
+
+            if (value) {
+                inputLanIp.val(value);
+                inputLanIp.attr("disabled", "");
+            } else {
+                inputLanIp.removeAttr("disabled");
+            }
+        });
+    });
+</script>
 <!--
 <script>
     // Self-executing function
