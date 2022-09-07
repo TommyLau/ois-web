@@ -60,19 +60,28 @@
             <label class="col-2 col-form-label" for="inputLanIp">LAN IP</label>
             <div class="col-10">
                 <div class="input-group">
-                    <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP" required>
-                    <div class="dropdown">
-                        <a class="btn btn-outline-secondary dropdown-toggle" href="#" role="button"
-                           data-bs-toggle="dropdown" aria-expanded="false">Select IP</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">192.168.1.1</a></li>
-                            <li><a class="dropdown-item" href="#">172.16.1.1</a></li>
-                            <li><a class="dropdown-item" href="#">10.0.0.1</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Custom IP</a></li>
-                        </ul>
+                    <div class="col-9">
+                        <input class="form-control" type="text" id="inputLanIp" placeholder="LAN IP" required>
+                    </div>
+                    <div class="col-3">
+                        <select class="form-select input-group-text" aria-label="Select LAN IP" id="selectLanIp"
+                                onclick="updateLanIp()">
+                            <optgroup label="General">
+                                <option value="192.168.1.1">192.168.1.1</option>
+                                <option value="172.16.1.1">172.16.1.1</option>
+                                <option value="10.0.0.1">10.0.0.1</option>
+                            </optgroup>
+                            <optgroup label="Behind router">
+                                <option value="192.168.0.1">192.168.0.1</option>
+                                <option value="192.168.2.1">192.168.2.1</option>
+                            </optgroup>
+                            <optgroup label="Xiaomi Mi Wi-Fi">
+                                <option value="192.168.31.1">192.16.31.1</option>
+                            </optgroup>
+                            <optgroup label="Other">
+                                <option value="" selected>Custom IP</option>
+                            </optgroup>
+                        </select>
                     </div>
                 </div>
                 <div class="form-text">The default gateway IP of OpenWrt.</div>
@@ -104,16 +113,6 @@
                 <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
             </div>
         </div>
-        <!--
-        <div class="row mb-3">
-            <div class="col-10 offset-sm-2">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="checkRemember">
-                    <label class="form-check-label" for="checkRemember">Remember me</label>
-                </div>
-            </div>
-        </div>
-        -->
         <div class="row">
             <div class="col-10 offset-2">
                 <button type="submit" class="btn btn-primary">Generate</button>
@@ -121,6 +120,19 @@
         </div>
     </form>
 </div>
+<script>
+    function updateLanIp() {
+        const value = document.getElementById("selectLanIp").value;
+        const inputLanIp = document.getElementById("inputLanIp");
+
+        if (value) {
+            inputLanIp.value = value;
+            inputLanIp.disabled = true;
+        } else {
+            inputLanIp.disabled = false;
+        }
+    }
+</script>
 <!-- Bootstrap JS Bundle with Popper -->
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
