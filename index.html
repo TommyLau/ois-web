@@ -109,7 +109,7 @@
                         <input class="form-check-input mt-0" type="checkbox" id="checkWifiPassword">
                     </div>
                     <input class="form-control" type="password" id="inputWifiPassword" placeholder="Wi-Fi Password"
-                           maxlength="63">
+                           maxlength="63" disabled>
                 </div>
                 <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
             </div>
@@ -130,31 +130,47 @@
         integrity="sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9"
         crossorigin="anonymous"></script>
 <script>
+    function changeCheckbox(checked, selector) {
+        if (checked) {
+            $(selector).removeAttr("disabled");
+        } else {
+            $(selector).attr("disabled", "");
+            $(selector).val("");
+        }
+    }
+
+    function updateLanIp() {
+        var inputLanIp = $("#inputLanIp");
+        var value = $("#selectLanIp").val();
+
+        if (value) {
+            inputLanIp.val(value);
+            inputLanIp.attr("disabled", "");
+        } else {
+            inputLanIp.removeAttr("disabled");
+        }
+    };
+
+    $(window).on('load', function () {
+        updateLanIp();
+    });
+
     $(document).ready(function () {
         // Select LAN IP
         $("#selectLanIp").change(function () {
-            var inputLanIp = $("#inputLanIp");
-            var value = $("#selectLanIp").val();
-
-            if (value) {
-                inputLanIp.val(value);
-                inputLanIp.attr("disabled", "");
-            } else {
-                inputLanIp.removeAttr("disabled");
-            }
+            updateLanIp();
         });
 
         // Check PPPoE
         $("#checkPppoe").change(function () {
-            if ($("#checkPppoe")[0].checked) {
-                $("#inputPppoeUsername").removeAttr("disabled");
-                $("#inputPppoePassword").removeAttr("disabled");
-            } else {
-                $("#inputPppoeUsername").attr("disabled", "");
-                $("#inputPppoeUsername").val("");
-                $("#inputPppoePassword").attr("disabled", "");
-                $("#inputPppoePassword").val("");
-            }
+            var checked = $("#checkPppoe")[0].checked;
+            changeCheckbox(checked, "#inputPppoeUsername");
+            changeCheckbox(checked, "#inputPppoePassword");
+        });
+
+        // Check Wi-Fi password
+        $("#checkWifiPassword").change(function () {
+            changeCheckbox($("#checkWifiPassword")[0].checked, "#inputWifiPassword");
         });
     });
 </script>
