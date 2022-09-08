@@ -296,6 +296,15 @@
             changeCheckbox(this.checked, "#inputSshKey");
         });
 
+        // Check Nebula
+        $("#checkNebula").change(function () {
+            var checked = this.checked;
+            changeCheckbox(checked, "#inputNebulaCa");
+            changeCheckbox(checked, "#inputNebulaCrt");
+            changeCheckbox(checked, "#inputNebulaKey");
+            changeCheckbox(checked, "#inputNebulaConfig");
+        });
+
         // Name change
         $("#inputName").on("input", function () {
             updateSsid();
