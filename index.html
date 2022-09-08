@@ -7,6 +7,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"
+          integrity="sha384-SOnAn/m2fVJCwnbEYgD4xzrPtvsXdElhOVvR8ND1YjB5nhGNwwf7nBQlhfAwHAZC" crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -110,6 +112,10 @@
                     </div>
                     <input class="form-control" type="password" id="inputWifiPassword" placeholder="Wi-Fi Password"
                            maxlength="63" disabled>
+                    <div class="input-group-text">
+                        <a class="btn btn-sm disabled" href="#" id="btnWifiPassword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                    </div>
                 </div>
                 <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
             </div>
@@ -194,6 +200,18 @@
         }
     }
 
+    function togglePassword(input, icon) {
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+            icon.removeClass("fa-eye-slash");
+            icon.addClass("fa-eye");
+        } else {
+            input.attr("type", "password");
+            icon.removeClass("fa-eye");
+            icon.addClass("fa-eye-slash");
+        }
+    }
+
     $(window).on('load', function () {
         updateLanIp();
         updateSsid();
@@ -223,6 +241,11 @@
         // Check Wi-Fi password
         $("#checkWifiPassword").change(function () {
             changeCheckbox(this.checked, "#inputWifiPassword");
+            if (this.checked) {
+                $("#btnWifiPassword").removeClass("disabled");
+            } else {
+                $("#btnWifiPassword").addClass("disabled");
+            }
         });
 
         // Check SSH Key
@@ -233,6 +256,12 @@
         // Name change
         $("#inputName").on("input", function () {
             updateSsid();
+        });
+
+        // Process password display of Wi-Fi password
+        $("#btnWifiPassword").on('click', function (event) {
+            event.preventDefault();
+            togglePassword($("#inputWifiPassword"), $(this).children("i"));
         });
 
     });
