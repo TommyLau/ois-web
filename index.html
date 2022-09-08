@@ -129,6 +129,18 @@
                 <div class="form-text">The PPPoE username and password provided by your ISP.</div>
             </div>
         </div>
+        <div class="row mb-3">
+            <label class="col-2 col-form-label" for="checkSshKey">SSH Key</label>
+            <div class="col-10">
+                <div class="input-group">
+                    <div class="input-group-text align-items-start">
+                        <input class="form-check-input mt-0" type="checkbox" id="checkSshKey">
+                    </div>
+                    <textarea class="form-control" id="inputSshKey" rows="3" placeholder="SSH Key" disabled></textarea>
+                </div>
+                <div class="form-text">Public key for Dropbear (OpenSSH) authentication.</div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-10 offset-2">
                 <button type="submit" class="btn btn-primary">Generate</button>
@@ -210,11 +222,16 @@
 
         // Check Wi-Fi password
         $("#checkWifiPassword").change(function () {
-            changeCheckbox($("#checkWifiPassword")[0].checked, "#inputWifiPassword");
+            changeCheckbox(this.checked, "#inputWifiPassword");
+        });
+
+        // Check SSH Key
+        $("#checkSshKey").change(function () {
+            changeCheckbox(this.checked, "#inputSshKey");
         });
 
         // Name change
-        $("#inputName").keyup(function () {
+        $("#inputName").on("input", function () {
             updateSsid();
         });
 
