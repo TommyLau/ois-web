@@ -131,6 +131,10 @@
                            disabled>
                     <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password"
                            disabled>
+                    <div class="input-group-text">
+                        <a class="btn btn-sm disabled" href="#" id="btnPppoePassword">
+                            <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                    </div>
                 </div>
                 <div class="form-text">The PPPoE username and password provided by your ISP.</div>
             </div>
@@ -236,6 +240,12 @@
             var checked = this.checked;
             changeCheckbox(checked, "#inputPppoeUsername");
             changeCheckbox(checked, "#inputPppoePassword");
+
+            if (checked) {
+                $("#btnPppoePassword").removeClass("disabled");
+            } else {
+                $("#btnPppoePassword").addClass("disabled");
+            }
         });
 
         // Check Wi-Fi password
@@ -262,6 +272,12 @@
         $("#btnWifiPassword").on('click', function (event) {
             event.preventDefault();
             togglePassword($("#inputWifiPassword"), $(this).children("i"));
+        });
+
+         // Process password display of PPPoE password
+        $("#btnPppoePassword").on('click', function (event) {
+            event.preventDefault();
+            togglePassword($("#inputPppoePassword"), $(this).children("i"));
         });
 
     });
