@@ -87,18 +87,18 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-2 col-form-label" for="checkPppoe">PPPoE</label>
+            <label class="col-2 col-form-label" for="checkSsid">SSID</label>
             <div class="col-10">
                 <div class="input-group">
                     <div class="input-group-text">
-                        <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
+                        <input class="form-check-input mt-0" type="checkbox" id="checkSsid">
                     </div>
-                    <input class="form-control" type="text" id="inputPppoeUsername" placeholder="PPPoE Username"
+                    <input class="form-control" type="text" id="inputSsid2" placeholder="SSID 2.4GHz"
                            disabled>
-                    <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password"
+                    <input class="form-control" type="text" id="inputSsid5" placeholder="SSID 5GHz"
                            disabled>
                 </div>
-                <div class="form-text">The PPPoE username and password provided by your ISP.</div>
+                <div class="form-text">The Wi-Fi name that displayed while you search for network.</div>
             </div>
         </div>
         <div class="row mb-3">
@@ -112,6 +112,21 @@
                            maxlength="63" disabled>
                 </div>
                 <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-2 col-form-label" for="checkPppoe">PPPoE</label>
+            <div class="col-10">
+                <div class="input-group">
+                    <div class="input-group-text">
+                        <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
+                    </div>
+                    <input class="form-control" type="text" id="inputPppoeUsername" placeholder="PPPoE Username"
+                           disabled>
+                    <input class="form-control" type="password" id="inputPppoePassword" placeholder="PPPoE Password"
+                           disabled>
+                </div>
+                <div class="form-text">The PPPoE username and password provided by your ISP.</div>
             </div>
         </div>
         <div class="row">
@@ -149,10 +164,27 @@
         } else {
             inputLanIp.removeAttr("disabled");
         }
-    };
+    }
+
+    function updateSsid() {
+        var checked = $("#checkSsid")[0].checked;
+        var value = $("#inputName").val();
+
+        if (!checked) {
+            if (value.length > 0) {
+                // Update SSID accordingly
+                $("#inputSsid2").val(value + "_2G");
+                $("#inputSsid5").val(value);
+            } else {
+                $("#inputSsid2").val("");
+                $("#inputSsid5").val("");
+            }
+        }
+    }
 
     $(window).on('load', function () {
         updateLanIp();
+        updateSsid();
     });
 
     $(document).ready(function () {
@@ -161,9 +193,17 @@
             updateLanIp();
         });
 
+        // Check SSID
+        $("#checkSsid").change(function () {
+            var checked = this.checked;
+            changeCheckbox(checked, "#inputSsid2");
+            changeCheckbox(checked, "#inputSsid5");
+            updateSsid();
+        });
+
         // Check PPPoE
         $("#checkPppoe").change(function () {
-            var checked = $("#checkPppoe")[0].checked;
+            var checked = this.checked;
             changeCheckbox(checked, "#inputPppoeUsername");
             changeCheckbox(checked, "#inputPppoePassword");
         });
@@ -172,6 +212,12 @@
         $("#checkWifiPassword").change(function () {
             changeCheckbox($("#checkWifiPassword")[0].checked, "#inputWifiPassword");
         });
+
+        // Name change
+        $("#inputName").keyup(function () {
+            updateSsid();
+        });
+
     });
 </script>
 <!--
