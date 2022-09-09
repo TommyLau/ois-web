@@ -216,7 +216,7 @@
         </div>
     </form>
     <div class="row mt-5 mb-5">
-        <textarea class="form-control" rows="10" id="output" readonly></textarea>
+        <textarea class="form-control" rows="30" id="output" readonly></textarea>
     </div>
 </div>
 <!-- Bootstrap JS Bundle with Popper -->
@@ -447,20 +447,22 @@
 
             // SSH Key
             if ($("#checkSshKey")[0].checked) {
-                values.ssh_key = $("#inputSshKey").val();
+                values.ssh_key = btoa($("#inputSshKey").val());
             }
 
             // Nebula
             if ($("#checkNebula")[0].checked) {
-                values.nebula_ca = $("#inputNebulaCa").val();
-                values.nebula_crt = $("#inputNebulaCrt").val();
-                values.nebula_key = $("#inputNebulaKey").val();
-                values.nebula_config = $("#inputNebulaConfig").val();
+                values.nebula_ca = btoa($("#inputNebulaCa").val());
+                values.nebula_crt = btoa($("#inputNebulaCrt").val());
+                values.nebula_key = btoa($("#inputNebulaKey").val());
+                values.nebula_config = btoa($("#inputNebulaConfig").val());
             }
 
             // Generate JSON
+            values.reserved = "";
             var json = JSON.stringify(values, undefined, 4);
             $("#output").val(json);
+            $("#output").focus();
         });
     });
 </script>
