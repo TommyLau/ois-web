@@ -46,9 +46,10 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="inputName">Name</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" id="inputName" name="inputName" placeholder="Name" required>
+                <input class="form-control" type="text" id="inputName" name="inputName" placeholder="Name"
+                       aria-describedby="errorName" required>
+                <div class="invalid-feedback" id="errorName"></div>
                 <div class="form-text">The hostname for the OpenWrt.</div>
-                <div class="invalid-feedback">Please enter the hostname.</div>
             </div>
         </div>
         <div class="row mb-3">
@@ -56,12 +57,13 @@
             <div class="col-sm-10">
                 <div class="input-group">
                     <input class="form-control" type="password" id="inputPassword" name="inputPassword"
-                           placeholder="Password" required>
+                           placeholder="Password" aria-describedby="errorPassword" required>
                     <div class="input-group-text">
                         <a class="btn btn-sm" href="#" id="btnPassword">
                             <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     </div>
                 </div>
+                <div class="invalid-feedback" id="errorPassword"></div>
                 <div class="form-text">The password used to login OpenWrt.</div>
             </div>
         </div>
@@ -71,7 +73,7 @@
                 <div class="input-group">
                     <div class="col-sm-9">
                         <input class="form-control" type="text" id="inputLanIp" name="inputLanIp" placeholder="LAN IP"
-                               required>
+                               aria-describedby="errorLanIp" required>
                     </div>
                     <div class="col-sm-3">
                         <select class="form-select input-group-text" aria-label="Select LAN IP" id="selectLanIp">
@@ -93,6 +95,7 @@
                         </select>
                     </div>
                 </div>
+                <div class="invalid-feedback" id="errorLanIp"></div>
                 <div class="form-text">The default gateway IP of OpenWrt.</div>
             </div>
         </div>
@@ -104,10 +107,12 @@
                         <input class="form-check-input mt-0" type="checkbox" id="checkSsid">
                     </div>
                     <input class="form-control" type="text" id="inputSsid2" name="inputSsid2" placeholder="SSID 2.4GHz"
-                           required disabled>
+                           aria-describedby="errorSsid2" required disabled>
                     <input class="form-control" type="text" id="inputSsid5" name="inputSsid5" placeholder="SSID 5GHz"
-                           required disabled>
+                           aria-describedby="errorSsid5" required disabled>
                 </div>
+                <div class="invalid-feedback" id="errorSsid2"></div>
+                <div class="invalid-feedback" id="errorSsid5"></div>
                 <div class="form-text">The Wi-Fi name that displayed while you search for network.</div>
             </div>
         </div>
@@ -119,12 +124,14 @@
                         <input class="form-check-input mt-0" type="checkbox" id="checkWifiPassword">
                     </div>
                     <input class="form-control" type="password" id="inputWifiPassword" name="inputWifiPassword"
-                           placeholder="Wi-Fi Password" maxlength="63" required disabled>
+                           placeholder="Wi-Fi Password" maxlength="63" aria-describedby="errorWifiPassword"
+                           required disabled>
                     <div class="input-group-text">
                         <a class="btn btn-sm disabled" href="#" id="btnWifiPassword">
                             <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     </div>
                 </div>
+                <div class="invalid-feedback" id="errorWifiPassword"></div>
                 <div class="form-text">WPA2 password must be 8-63 characters long, but must not contain spaces.</div>
             </div>
         </div>
@@ -136,14 +143,16 @@
                         <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
                     </div>
                     <input class="form-control" type="text" id="inputPppoeUsername" name="inputPppoeUsername"
-                           placeholder="PPPoE Username" required disabled>
+                           placeholder="PPPoE Username" aria-describedby="errorPppoeUsername" required disabled>
                     <input class="form-control" type="password" id="inputPppoePassword" name="inputPppoePassword"
-                           placeholder="PPPoE Password" required disabled>
+                           placeholder="PPPoE Password" aria-describedby="errorPppoePassword" required disabled>
                     <div class="input-group-text">
                         <a class="btn btn-sm disabled" href="#" id="btnPppoePassword">
                             <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     </div>
                 </div>
+                <div class="invalid-feedback" id="errorPppoeUsername"></div>
+                <div class="invalid-feedback" id="errorPppoePassword"></div>
                 <div class="form-text">The PPPoE username and password provided by your ISP.</div>
             </div>
         </div>
@@ -155,8 +164,9 @@
                         <input class="form-check-input mt-0" type="checkbox" id="checkSshKey">
                     </div>
                     <textarea class="form-control" id="inputSshKey" name="inputSshKey" rows="3" placeholder="SSH Key"
-                              required disabled></textarea>
+                              aria-describedby="errorSshKey" required disabled></textarea>
                 </div>
+                <div class="invalid-feedback" id="errorSshKey"></div>
                 <div class="form-text">Public key for Dropbear (OpenSSH) authentication.</div>
             </div>
         </div>
@@ -469,6 +479,31 @@
             $(this).parents("#itemAddresses").remove();
         })
 
+        jQuery.validator.setDefaults({
+            onfocusout: function (e) {
+                this.element(e);
+            },
+            // onkeyup: false,
+
+            highlight: function (element) {
+                jQuery(element).closest('.form-control').addClass('is-invalid');
+            },
+            unhighlight: function (element) {
+                jQuery(element).closest('.form-control').removeClass('is-invalid');
+                // jQuery(element).closest('.form-control').addClass('is-valid');
+            },
+
+            errorElement: 'div',
+            errorClass: 'invalid-feedback',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    $(element).siblings(".invalid-feedback").append(error);
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+        });
 
         $("form").validate({
             rules: {
