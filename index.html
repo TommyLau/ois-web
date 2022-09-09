@@ -189,10 +189,17 @@
             <div class="col-sm-10">
                 <a class="btn btn-outline-success" href="#" id="btnStaticLeasesAdd">
                     <i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
-                <div id="rowStaticLeases">
-
-                </div>
+                <div id="rowStaticLeases"></div>
                 <div class="form-text">Static leases for specific MAC address.</div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Domain Address</label>
+            <div class="col-sm-10">
+                <a class="btn btn-outline-success" href="#" id="btnAddressesAdd">
+                    <i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
+                <div id="rowAddresses"></div>
+                <div class="form-text">Domains to force to an IP address.</div>
             </div>
         </div>
         <div class="row">
@@ -340,9 +347,9 @@
                 <div class="input-group" id="itemStaticLeases">
                 <a class="btn btn-outline-danger" href="#" id="btnStaticLeasesDelete">
                 <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
-                <input class="form-control" type="text" id="inputStaticLeaseName" placeholder="Name" required>
-                <input class="form-control" type="text" id="inputStaticLeaseMac" placeholder="MAC Address" required>
-                <input class="form-control" type="text" id="inputStaticLeaseIp" placeholder="IP Address" required>
+                <input class="form-control" type="text" id="inputStaticLeaseHost" placeholder="Hostname" required>
+                <input class="form-control" type="text" id="inputStaticLeaseMac" placeholder="MAC address" required>
+                <input class="form-control" type="text" id="inputStaticLeaseIp" placeholder="IPv4 address" required>
                 </div>`;
 
             $('#rowStaticLeases').append(row);
@@ -351,6 +358,25 @@
         $("body").on("click", "#btnStaticLeasesDelete", function (event) {
             event.preventDefault();
             $(this).parents("#itemStaticLeases").remove();
+        })
+
+        // Process domain addresses
+        $("#btnAddressesAdd").click(function (event) {
+            event.preventDefault();
+            var row = `
+                <div class="input-group" id="itemAddresses">
+                <a class="btn btn-outline-danger" href="#" id="btnAddressesDelete">
+                <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
+                <input class="form-control" type="text" id="inputAddressesHost" placeholder="Hostname" required>
+                <input class="form-control" type="text" id="inputAddressesIp" placeholder="IPv4 address" required>
+                </div>`;
+
+            $('#rowAddresses').append(row);
+        });
+
+        $("body").on("click", "#btnAddressesDelete", function (event) {
+            event.preventDefault();
+            $(this).parents("#itemAddresses").remove();
         })
 
     });
