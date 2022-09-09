@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -184,6 +184,17 @@
                 <div class="form-text">Nebula configuration.</div>
             </div>
         </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">Static Leases</label>
+            <div class="col-sm-10">
+                <a class="btn btn-outline-success" href="#" id="btnStaticLeasesAdd">
+                    <i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
+                <div id="rowStaticLeases">
+
+                </div>
+                <div class="form-text">Static leases for specific MAC address.</div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-10 offset-2">
                 <button type="submit" class="btn btn-primary">Generate</button>
@@ -321,6 +332,26 @@
             event.preventDefault();
             togglePassword($("#inputPppoePassword"), $(this).children("i"));
         });
+
+        // Process static leases
+        $("#btnStaticLeasesAdd").click(function (event) {
+            event.preventDefault();
+            var row = `
+                <div class="input-group" id="itemStaticLeases">
+                <a class="btn btn-outline-danger" href="#" id="btnStaticLeasesDelete">
+                <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
+                <input class="form-control" type="text" id="inputStaticLeaseName" placeholder="Name" required>
+                <input class="form-control" type="text" id="inputStaticLeaseMac" placeholder="MAC Address" required>
+                <input class="form-control" type="text" id="inputStaticLeaseIp" placeholder="IP Address" required>
+                </div>`;
+
+            $('#rowStaticLeases').append(row);
+        });
+
+        $("body").on("click", "#btnStaticLeasesDelete", function (event) {
+            event.preventDefault();
+            $(this).parents("#itemStaticLeases").remove();
+        })
 
     });
 </script>
