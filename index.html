@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>OIS Config Tool</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet"
-          integrity="sha384-SOnAn/m2fVJCwnbEYgD4xzrPtvsXdElhOVvR8ND1YjB5nhGNwwf7nBQlhfAwHAZC" crossorigin="anonymous">
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet" integrity="sha384-SOnAn/m2fVJCwnbEYgD4xzrPtvsXdElhOVvR8ND1YjB5nhGNwwf7nBQlhfAwHAZC" crossorigin="anonymous">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -36,18 +34,13 @@
 <div class="container">
     <div class="p-5 my-4 bg-light rounded-3">
         <h1>OpenWrt Init Script (OIS) Configuration Tool</h1>
-        <p class="lead">This tools is used to work with OIS script, and generate the configuration file in JSON
-            format.</p>
-        <!--
-        <p><a href="#" class="btn btn-primary btn-lg">Get started</a></p>
-        -->
+        <p class="lead">This tools is used to work with OIS script, and generate the configuration file in JSON format.</p>
     </div>
     <form class="needs-validation">
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="inputName">Name</label>
             <div class="col-sm-10">
-                <input class="form-control" type="text" id="inputName" name="inputName" placeholder="Name"
-                       aria-describedby="errorName" required>
+                <input class="form-control" type="text" id="inputName" name="inputName" placeholder="Name" aria-describedby="errorName" required>
                 <div class="invalid-feedback" id="errorName"></div>
                 <div class="form-text">The hostname for the OpenWrt.</div>
             </div>
@@ -56,11 +49,9 @@
             <label class="col-sm-2 col-form-label" for="inputPassword">Password</label>
             <div class="col-sm-10">
                 <div class="input-group">
-                    <input class="form-control" type="password" id="inputPassword" name="inputPassword"
-                           placeholder="Password" aria-describedby="errorPassword" required>
+                    <input class="form-control" type="password" id="inputPassword" name="inputPassword" placeholder="Password" aria-describedby="errorPassword" required>
                     <div class="input-group-text">
-                        <a class="btn btn-sm" href="#" id="btnPassword">
-                            <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm" href="#" id="btnPassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="invalid-feedback" id="errorPassword"></div>
@@ -72,8 +63,7 @@
             <div class="col-sm-10">
                 <div class="input-group">
                     <div class="col-sm-9">
-                        <input class="form-control" type="text" id="inputLanIp" name="inputLanIp" placeholder="LAN IP"
-                               aria-describedby="errorLanIp" required>
+                        <input class="form-control" type="text" id="inputLanIp" name="inputLanIp" placeholder="LAN IP" aria-describedby="errorLanIp" required>
                     </div>
                     <div class="col-sm-3">
                         <select class="form-select input-group-text" aria-label="Select LAN IP" id="selectLanIp">
@@ -106,10 +96,8 @@
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" id="checkSsid">
                     </div>
-                    <input class="form-control" type="text" id="inputSsid2" name="inputSsid2" placeholder="SSID 2.4GHz"
-                           aria-describedby="errorSsid2" required disabled>
-                    <input class="form-control" type="text" id="inputSsid5" name="inputSsid5" placeholder="SSID 5GHz"
-                           aria-describedby="errorSsid5" required disabled>
+                    <input class="form-control" type="text" id="inputSsid2" name="inputSsid2" placeholder="SSID 2.4GHz" aria-describedby="errorSsid2" required disabled>
+                    <input class="form-control" type="text" id="inputSsid5" name="inputSsid5" placeholder="SSID 5GHz" aria-describedby="errorSsid5" required disabled>
                 </div>
                 <div class="invalid-feedback" id="errorSsid2"></div>
                 <div class="invalid-feedback" id="errorSsid5"></div>
@@ -123,12 +111,9 @@
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" id="checkWifiPassword">
                     </div>
-                    <input class="form-control" type="password" id="inputWifiPassword" name="inputWifiPassword"
-                           placeholder="Wi-Fi Password" maxlength="63" aria-describedby="errorWifiPassword"
-                           required disabled>
+                    <input class="form-control" type="password" id="inputWifiPassword" name="inputWifiPassword" placeholder="Wi-Fi Password" maxlength="63" aria-describedby="errorWifiPassword" required disabled>
                     <div class="input-group-text">
-                        <a class="btn btn-sm disabled" href="#" id="btnWifiPassword">
-                            <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm disabled" href="#" id="btnWifiPassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="invalid-feedback" id="errorWifiPassword"></div>
@@ -142,13 +127,10 @@
                     <div class="input-group-text">
                         <input class="form-check-input mt-0" type="checkbox" id="checkPppoe">
                     </div>
-                    <input class="form-control" type="text" id="inputPppoeUsername" name="inputPppoeUsername"
-                           placeholder="PPPoE Username" aria-describedby="errorPppoeUsername" required disabled>
-                    <input class="form-control" type="password" id="inputPppoePassword" name="inputPppoePassword"
-                           placeholder="PPPoE Password" aria-describedby="errorPppoePassword" required disabled>
+                    <input class="form-control" type="text" id="inputPppoeUsername" name="inputPppoeUsername" placeholder="PPPoE Username" aria-describedby="errorPppoeUsername" required disabled>
+                    <input class="form-control" type="password" id="inputPppoePassword" name="inputPppoePassword" placeholder="PPPoE Password" aria-describedby="errorPppoePassword" required disabled>
                     <div class="input-group-text">
-                        <a class="btn btn-sm disabled" href="#" id="btnPppoePassword">
-                            <i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        <a class="btn btn-sm disabled" href="#" id="btnPppoePassword"><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="invalid-feedback" id="errorPppoeUsername"></div>
@@ -163,8 +145,7 @@
                     <div class="input-group-text align-items-start">
                         <input class="form-check-input mt-0" type="checkbox" id="checkSshKey">
                     </div>
-                    <textarea class="form-control" id="inputSshKey" name="inputSshKey" rows="3" placeholder="SSH Key"
-                              aria-describedby="errorSshKey" required disabled></textarea>
+                    <textarea class="form-control" id="inputSshKey" name="inputSshKey" rows="3" placeholder="SSH Key" aria-describedby="errorSshKey" required disabled></textarea>
                 </div>
                 <div class="invalid-feedback" id="errorSshKey"></div>
                 <div class="form-text">Public key for Dropbear (OpenSSH) authentication.</div>
@@ -179,23 +160,19 @@
                     </div>
                     <div class="form-control">
                         <div class="row mb-3">
-                            <textarea class="form-control" id="inputNebulaCa" name="inputNebulaCa" rows="3"
-                                      placeholder="Nebula CA" required disabled></textarea>
+                            <textarea class="form-control" id="inputNebulaCa" name="inputNebulaCa" rows="3" placeholder="Nebula CA" required disabled></textarea>
                             <div class="form-text">Nebula CA.</div>
                         </div>
                         <div class="row mb-3">
-                            <textarea class="form-control" id="inputNebulaCrt" name="inputNebulaCrt" rows="3"
-                                      placeholder="Nebula Certificate" required disabled></textarea>
+                            <textarea class="form-control" id="inputNebulaCrt" name="inputNebulaCrt" rows="3" placeholder="Nebula Certificate" required disabled></textarea>
                             <div class="form-text">Nebula host certificate.</div>
                         </div>
                         <div class="row mb-3">
-                            <textarea class="form-control" id="inputNebulaKey" name="inputNebulaKey" rows="3"
-                                      placeholder="Nebula Key" required disabled></textarea>
+                            <textarea class="form-control" id="inputNebulaKey" name="inputNebulaKey" rows="3" placeholder="Nebula Key" required disabled></textarea>
                             <div class="form-text">Nebula host private key.</div>
                         </div>
                         <div class="row mb-3">
-                            <textarea class="form-control" id="inputNebulaConfig" name="inputNebulaConfig" rows="3"
-                                      placeholder="Nebula Config" required disabled></textarea>
+                            <textarea class="form-control" id="inputNebulaConfig" name="inputNebulaConfig" rows="3" placeholder="Nebula Config" required disabled></textarea>
                             <div class="form-text">Nebula config file in yaml format.</div>
                         </div>
                     </div>
@@ -206,8 +183,7 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">Static Leases</label>
             <div class="col-sm-10">
-                <a class="btn btn-outline-success" href="#" id="btnStaticLeasesAdd">
-                    <i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
+                <a class="btn btn-outline-success" href="#" id="btnStaticLeasesAdd"><i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
                 <div id="rowStaticLeases"></div>
                 <div class="form-text">Static leases for specific MAC address.</div>
             </div>
@@ -215,8 +191,7 @@
         <div class="row mb-3">
             <label class="col-sm-2 col-form-label">Domain Address</label>
             <div class="col-sm-10">
-                <a class="btn btn-outline-success" href="#" id="btnAddressesAdd">
-                    <i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
+                <a class="btn btn-outline-success" href="#" id="btnAddressesAdd"><i class="fa-regular fa-plus" aria-hidden="true"></i> Add</a>
                 <div id="rowAddresses"></div>
                 <div class="form-text">Domains to force to an IP address.</div>
             </div>
@@ -232,16 +207,10 @@
     </div>
 </div>
 <!-- Bootstrap JS Bundle with Popper -->
-<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js"
-        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 <!-- jQuery -->
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js"
-        integrity="sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"
-        integrity="sha384-aEDtD4n2FLrMdE9psop0SHdNyy/W9cBjH22rSRp+3wPHd62Y32uijc0H2eLmgaSn"
-        crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9" crossorigin="anonymous"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha384-aEDtD4n2FLrMdE9psop0SHdNyy/W9cBjH22rSRp+3wPHd62Y32uijc0H2eLmgaSn" crossorigin="anonymous"></script>
 <script>
     function changeCheckbox(checked, selector) {
         if (checked) {
