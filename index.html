@@ -218,6 +218,9 @@
         } else {
             $(selector).attr("disabled", "");
             $(selector).val("");
+            // Remove invalid feedback
+            $(selector).removeClass("is-invalid");
+            $(selector).removeAttr("aria-invalid");
         }
     }
 
@@ -339,6 +342,9 @@
         // Select LAN IP
         $("#selectLanIp").change(function () {
             updateLanIp();
+            $("#inputLanIp").removeClass("is-invalid");
+            $("#inputLanIp").removeAttr("aria-invalid");
+            $("#errorLanIp").hide();
         });
 
         // Check SSID
@@ -347,6 +353,11 @@
             changeCheckbox(checked, "#inputSsid2");
             changeCheckbox(checked, "#inputSsid5");
             updateSsid();
+
+            if (!checked) {
+                $("#errorSsid2").hide();
+                $("#errorSsid5").hide();
+            }
         });
 
         // Check PPPoE
@@ -359,22 +370,30 @@
                 $("#btnPppoePassword").removeClass("disabled");
             } else {
                 $("#btnPppoePassword").addClass("disabled");
+                $("#errorPppoeUsername").hide();
+                $("#errorPppoePassword").hide();
             }
         });
 
         // Check Wi-Fi password
         $("#checkWifiPassword").change(function () {
             changeCheckbox(this.checked, "#inputWifiPassword");
+
             if (this.checked) {
                 $("#btnWifiPassword").removeClass("disabled");
             } else {
                 $("#btnWifiPassword").addClass("disabled");
+                $("#errorWifiPassword").hide();
             }
         });
 
         // Check SSH Key
         $("#checkSshKey").change(function () {
             changeCheckbox(this.checked, "#inputSshKey");
+
+            if (!this.checked) {
+                $("#errorSshKey").hide();
+            }
         });
 
         // Check Nebula
@@ -413,13 +432,15 @@
         $("#btnStaticLeasesAdd").click(function (event) {
             event.preventDefault();
             var row = `
-                <div class="input-group" id="itemStaticLeases">
-                <a class="btn btn-outline-danger" href="#" id="btnStaticLeasesDelete">
-                <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
-                <input class="form-control" type="text" id="inputStaticLeases[Host][]" name="inputStaticLeases[Host][]" placeholder="Hostname" required>
-                <input class="form-control" type="text" id="inputStaticLeases[Mac][]" name="inputStaticLeases[Mac][]" placeholder="MAC address" required>
-                <input class="form-control" type="text" id="inputStaticLeases[Ip][]" name="inputStaticLeases[Ip][]" placeholder="IPv4 address" required>
-                </div>`;
+<div id="itemStaticLeases">
+    <div class="input-group">
+        <a class="btn btn-outline-danger" href="#" id="btnStaticLeasesDelete"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
+        <input class="form-control" type="text" id="inputStaticLeases[Host][]" name="inputStaticLeases[Host][]" placeholder="Hostname" required>
+        <input class="form-control" type="text" id="inputStaticLeases[Mac][]" name="inputStaticLeases[Mac][]" placeholder="MAC address" required>
+        <input class="form-control" type="text" id="inputStaticLeases[Ip][]" name="inputStaticLeases[Ip][]" placeholder="IPv4 address" required>
+    </div>
+</div>
+`;
 
             $('#rowStaticLeases').append(row);
         });
@@ -433,12 +454,14 @@
         $("#btnAddressesAdd").click(function (event) {
             event.preventDefault();
             var row = `
-                <div class="input-group" id="itemAddresses">
-                <a class="btn btn-outline-danger" href="#" id="btnAddressesDelete">
-                <i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
-                <input class="form-control" type="text" id="inputAddresses[Host][]" name="inputAddresses[Host][]" placeholder="Hostname" required>
-                <input class="form-control" type="text" id="inputAddresses[Ip][]" name="inputAddresses[Ip][]"  placeholder="IPv4 address" required>
-                </div>`;
+<div id="itemAddresses">
+    <div class="input-group">
+        <a class="btn btn-outline-danger" href="#" id="btnAddressesDelete"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Delete</a>
+        <input class="form-control" type="text" id="inputAddresses[Host][]" name="inputAddresses[Host][]" placeholder="Hostname" required>
+        <input class="form-control" type="text" id="inputAddresses[Ip][]" name="inputAddresses[Ip][]" placeholder="IPv4 address" required>
+    </div>
+</div>
+`;
 
             $('#rowAddresses').append(row);
         });
@@ -474,44 +497,55 @@
             },
         });
 
+        $.validator.addMethod('validateIp', function (value) {
+            return value.match(/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/);
+        }, 'Invalid IP address');
+
         $("form").validate({
             rules: {
-                inputPassword: "required",
+                inputName: "required",
+                inputPassword: {
+                    required: true,
+                    minlength: function () {
+                        return $("#checkWifiPassword").is(":checked") ? 1 : 8;
+                    }
+                },
+                inputLanIp: {
+                    required: true,
+                    validateIp: true
+                },
+                inputSsid2: "required",
+                inputSsid5: "required",
                 inputWifiPassword: {
                     required: true,
                     minlength: 8
-                }
+                },
+                inputPppoeUsername: "required",
+                inputPppoePassword: "required"
             },
             messages: {
-                inputWifiPassword: {
-                    minlength: "Min 8 length"
+                inputName: {
+                    required: "Please enter the hostname of the router."
+                },
+                inputPassword: {
+                    required: "Please enter the 'root' password.",
+                    minlength: "Please enter at least 8 characters for Wi-Fi password."
+                },
+                inputSsid2: {
+                    required: "Please enter the Wi-Fi name for 2.4GHz."
+                },
+                inputSsid5: {
+                    required: "Please enter the Wi-Fi name for 5GHz."
+                },
+                inputPppoeUsername: {
+                    required: "Please enter PPPoE username."
+                },
+                inputPppoePassword: {
+                    required: "Please enter PPPoE password."
                 }
             }
         });
     });
 </script>
-<!--
-<script>
-    // Self-executing function
-    (function () {
-        'use strict';
-        window.addEventListener('load', function () {
-            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-            var forms = document.getElementsByClassName('needs-validation');
-
-            // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function (form) {
-                form.addEventListener('submit', function (event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
--->
 </body>
 </html>
